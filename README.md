@@ -19,16 +19,17 @@ when a newer version exists).
 
 ## Install the skill
 
-Clone the repo and link the skill into your agent's skills directory:
-
 ```bash
-git clone https://github.com/groniz/groniz-cli.git
-ln -s "$PWD/groniz-cli/skills/groniz-cli" ~/.claude/skills/groniz-cli
+npx skills add groniz/groniz-cli
 ```
 
-Link rather than copy, so `git pull` keeps the skill current. For a single project,
-link it into `<project>/.claude/skills/` instead. Agents that read `.agents/skills/`
-take the same target.
+This detects your agent and installs into its skills directory — `.claude/skills/`
+for Claude Code, `.agents/skills/` for Cline, Cursor, and OpenCode. To skip the
+prompt, name the targets:
+
+```bash
+npx skills add groniz/groniz-cli -a claude-code -a opencode
+```
 
 ## What the skill covers
 
