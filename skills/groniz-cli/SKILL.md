@@ -20,7 +20,7 @@ Install if missing (self-contained native binary, no node required):
 ## Two hard rules
 
 **1. Authenticate first.** Every command fails without credentials. Check with
-`groniz auth:status`. To set up, prefer the STORED key — it survives across shells
+`groniz whoami`. To set up, prefer the STORED key — it survives across shells
 and agents (`export` only affects the current shell):
 
 ```bash
@@ -47,7 +47,7 @@ this guide shows `-m "something.jpg"`, read it as "the `.path` from `groniz uplo
 
 ```bash
 # 1. Auth — see rule 1
-groniz auth:status
+groniz whoami
 
 # 2. Discover — get the channel id AND its required settings/limits (mandatory).
 groniz integrations:list                       # ids + identifiers (X = "x"); bare JSON array
@@ -139,5 +139,5 @@ integrations:list [--group <id>]  ·  integrations:groups  ·  integrations:sett
 integrations:trigger <id> <method> -d '<json>'
 analytics:platform <id> [-d days]  ·  analytics:post <id> [-d days]   (default 7)
 upload <file>       → { id, name, path, ... }  — use .path
-auth:apikey set|show  ·  auth:login  ·  auth:logout  ·  auth:status  ·  update [--check]
+auth:apikey set|show  ·  auth:login  ·  auth:logout  ·  whoami  ·  update [--check]
 ```
