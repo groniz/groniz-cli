@@ -1,14 +1,17 @@
 ---
 name: groniz-cli
-description: Groniz is a tool to schedule social media and chat posts to 28+ channels X, LinkedIn, LinkedIn Page, Reddit, Instagram, Facebook Page, Threads, YouTube, Google My Business, TikTok, Pinterest, Dribbble, Discord, Slack, Kick, Twitch, Mastodon, Bluesky, Lemmy, Farcaster, Telegram, Nostr, VK, Medium, Dev.to, Hashnode, WordPress, ListMonk
-homepage: https://docs.groniz.com/public-api/introduction
-metadata: {"openclaw":{"emoji":"🌎","requires":{"bins":[],"env":[]}}}
+description: Schedules and manages social media and chat posts with the Groniz CLI — authenticate, discover channels and their required settings, upload media, create scheduled posts, drafts, or threads, and read post and platform analytics. Use when a user wants to schedule, draft, or analyze a post, or mentions Groniz or any of its 28+ channels: X, LinkedIn, LinkedIn Page, Reddit, Instagram, Facebook Page, Threads, YouTube, Google My Business, TikTok, Pinterest, Dribbble, Discord, Slack, Kick, Twitch, Mastodon, Bluesky, Lemmy, Farcaster, Telegram, Nostr, VK, Medium, Dev.to, Hashnode, WordPress, ListMonk.
+license: Apache-2.0
+compatibility: Requires network access and jq. Installs the groniz native binary from https://groniz.com/install.sh
+metadata:
+  openclaw: '{"emoji":"🌎","requires":{"bins":[],"env":[]}}'
 ---
 
 Groniz CLI schedules posts across 28+ social channels. `groniz --help` lists every
 command; `groniz <command> --help` gives its flags and examples. This guide covers
 only what `--help` can't: the two hard rules, the workflow, and the non-obvious
-traps that cause 400s.
+traps that cause 400s. The HTTP API behind the CLI is documented at
+<https://docs.groniz.com/public-api/introduction>.
 
 Install if missing (self-contained native binary, no node required):
 `curl -fsSL https://groniz.com/install.sh | sh`. Self-update: `groniz update --check`
