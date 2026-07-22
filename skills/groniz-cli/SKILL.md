@@ -1,6 +1,6 @@
 ---
 name: groniz-cli
-description: Schedules and manages social media and chat posts with the Groniz CLI — authenticate, discover channels and their required settings, upload media, create scheduled posts, drafts, or threads, read post and platform analytics, and research any public X account (profile, posts, search, engagement metrics) without connecting it. Use when a user wants to schedule, draft, or analyze a post, research a competitor or a topic on X, or mentions Groniz or any of its 28+ channels — X, LinkedIn, LinkedIn Page, Reddit, Instagram, Facebook Page, Threads, YouTube, Google My Business, TikTok, Pinterest, Dribbble, Discord, Slack, Kick, Twitch, Mastodon, Bluesky, Lemmy, Farcaster, Telegram, Nostr, VK, Medium, Dev.to, Hashnode, WordPress, ListMonk.
+description: Queues immediate publication, schedules, and manages social media, chat posts, and articles with the Groniz CLI — authenticate, discover channels and their required settings, upload media, create immediate or scheduled posts, drafts, or threads, read post and platform analytics, and research any public X account (profile, posts, search, engagement metrics) without connecting it. Use when a user wants to publish now, schedule, draft, or analyze a post, research a competitor or a topic on X, or mentions Groniz or any of its 28+ channels — X, LinkedIn, LinkedIn Page, Reddit, Instagram, Facebook Page, Threads, YouTube, Google My Business, TikTok, Pinterest, Dribbble, Discord, Slack, Kick, Twitch, Mastodon, Bluesky, Lemmy, Farcaster, Telegram, Nostr, VK, Medium, Dev.to, Hashnode, WordPress, ListMonk.
 license: Apache-2.0
 compatibility: Requires network access and jq. Installs the groniz native binary from https://groniz.com/install.sh
 metadata:
@@ -63,6 +63,10 @@ MEDIA=$(groniz upload image.png | jq -r '.path')
 
 # 5. Post — include EVERY required setting for the channel
 groniz posts create -c "Content" -m "$MEDIA" -s "2030-12-31T12:00:00Z" \
+  --settings '{"who_can_reply_post":"everyone"}' -i "<id>"
+
+# Or queue immediate publication — `now` needs no dummy schedule date
+groniz posts create -c "Content" -m "$MEDIA" -t now \
   --settings '{"who_can_reply_post":"everyone"}' -i "<id>"
 
 # 6. Analyze
@@ -170,6 +174,11 @@ groniz posts connect <post-id> --release-id "<id>" # link the right one; analyti
 checks at create time — a too-long or mis-configured draft passes create and fails
 only when promoted with `groniz posts status <id> --status schedule`.
 
+**`-t now` starts publication asynchronously.** It removes the scheduled wait and
+queues the existing provider workflow immediately; the command returns the created
+post JSON, not a synchronous confirmation from the remote platform. Omit `-s` in
+this mode. `schedule` and `draft` still require an ISO-8601 date.
+
 ## Command map
 
 Commands are grouped into domains: `groniz <domain> <command>`. `groniz --help` names every
@@ -178,7 +187,7 @@ command in one screen; `groniz <domain> <command> --help` adds flags, examples, 
 
 ```
 posts create        -c content (repeat=thread) · -m media (uploaded .path) · -i ids (comma=multi-channel)
-                    -s ISO-8601 date (REQUIRED) · -t schedule|draft · -d delay-min · --settings '<json>' · --json <file>
+                    -s ISO-8601 date (unless `-t now`) · -t schedule|draft|now · -d delay-min · --settings '<json>' · --json <file>
 posts list          --startDate / --endDate (default: -30d..+30d) → { posts: [...] }
 posts delete <id>   ·  posts status <id> --status draft|schedule
 posts missing <id>  ·  posts connect <id> --release-id "<id>"      (missing-release flow)
