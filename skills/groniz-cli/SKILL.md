@@ -1,13 +1,16 @@
 ---
 name: groniz-cli
-description: Queues immediate publication, schedules, and manages social media, chat posts, and articles with the Groniz CLI — authenticate, discover channels and their required settings, upload media, create immediate or scheduled posts, drafts, or threads, read post and platform analytics, and research any public X account (profile, posts, search, engagement metrics) without connecting it. Use when a user wants to publish now, schedule, draft, or analyze a post, research a competitor or a topic on X, or mentions Groniz or any of its 28+ channels — X, LinkedIn, LinkedIn Page, Reddit, Instagram, Facebook Page, Threads, YouTube, Google My Business, TikTok, Pinterest, Dribbble, Discord, Slack, Kick, Twitch, Mastodon, Bluesky, Lemmy, Farcaster, Telegram, Nostr, VK, Medium, Dev.to, Hashnode, WordPress, ListMonk.
+description: Queues immediate publication, schedules, and manages social media, chat posts, and articles with the Groniz CLI — authenticate, discover channels and their required settings, upload media, create immediate or scheduled posts, drafts, or threads, read post and platform analytics, and research any public X account (profile, posts, search, engagement metrics) without connecting it. Use when a user wants to publish now, schedule, draft, or analyze a post, research a competitor or a topic on X, or mentions Groniz or one of its 32+ channels, including X, LinkedIn, Instagram, Facebook, Threads, YouTube, TikTok, Reddit, Pinterest, Discord, Slack, Telegram, Bluesky, Mastodon, and WordPress.
 license: Apache-2.0
-compatibility: Requires network access and jq. Installs the groniz native binary from https://groniz.com/install.sh
 metadata:
   openclaw: '{"emoji":"🌎","requires":{"bins":[],"env":[]}}'
 ---
 
-Groniz CLI schedules posts across 28+ social channels, and reads public data from a platform.
+# Groniz CLI
+
+Groniz CLI schedules posts across 32+ social channels, and reads public data from a platform.
+Mainstream channels include X, LinkedIn, Instagram, Facebook, Threads, YouTube, TikTok,
+Reddit, Pinterest, Discord, Slack, Telegram, Bluesky, Mastodon, and WordPress.
 Commands are grouped into domains — `groniz <domain> <command>` — but `groniz --help` still
 names every one of them in a single screen, so one call gets you the whole map;
 `groniz <domain> <command> --help` then adds flags, examples, and a `Risk · Cost` footer.
@@ -15,7 +18,8 @@ This guide covers only what `--help` can't: the two hard rules, the workflow, an
 non-obvious traps that cause 400s. The HTTP API behind the CLI is documented at
 <https://docs.groniz.com/public-api/introduction>.
 
-Install if missing (self-contained native binary, no node required):
+Requires network access and `jq`. Install if missing (self-contained native binary,
+no node required):
 `curl -fsSL https://groniz.com/install.sh | sh`. Self-update: `groniz update --check`
 (exit 10 = behind) then `groniz update`.
 
